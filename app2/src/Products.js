@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import './Products.css'
 
 class Product extends Component{
+    removeProduct = () => {
+        this.props.onRemoveClicked(this.props.index)
+    }
+
     render(){
         return <div className='product'>
             <div className='details'>
@@ -9,7 +13,7 @@ class Product extends Component{
                 <div className='desc'>{this.props.product.description}</div>
             </div>
             <div className='actions'>
-                <div className='remove' title='fix me'>x</div>
+                <div className='remove' onClick={this.removeProduct}>x</div>
             </div>
         </div>
     }
@@ -20,7 +24,7 @@ class Products extends Component{
         return <div className='products'>
             {this.props.products.map(
                 (p, i) => 
-                <Product product={p} key={'product-' + i }/>
+                <Product product={p} key={'product-' + i } onRemoveClicked={this.props.onRemoveClicked} index={i}/>
             )}
         </div>
     }
